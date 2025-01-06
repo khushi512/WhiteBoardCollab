@@ -5,31 +5,28 @@ import { getDatabase, ref, push, onChildAdded, remove, get, query, orderByChild,
 const firebaseConfig = {
     apiKey: "AIzaSyDMLU4qCZH1xfbK2cMDehm_i_T1LPw2tyY",
     authDomain: "whiteboard-be033.firebaseapp.com",
-    databaseURL: 'https://whiteboard-be033-default-rtdb.firebaseio.com',
     projectId: "whiteboard-be033",
     storageBucket: "whiteboard-be033.firebasestorage.app",
     messagingSenderId: "365153102123",
     appId: "1:365153102123:web:75197ed8410d89e79cbd6e",
     measurementId: "G-067ZQ3G1YM"
-};
+  };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-const userId = user_${Math.floor(Math.random() * 100000)};
-console.log('User ID:', userId);
-
 // Create references to different nodes in Firebase
 const whiteboardRef = ref(database, 'drawings');
-const voiceNotesRef = ref(database, 'voiceNotes'); // Separate node for voice notes
+// Separate node for voice notes
+const voiceNotesRef = ref(database, 'voiceNotes'); 
 
 // Setup Canvas
 const canvas = document.getElementById("whiteboard");
 const ctx = canvas.getContext("2d");
 
 let drawing = false;
-let currentTool = "pencil"; // Default tool
+let currentTool = "pencil"; // Default tool (pencil)
 let currentColor = "#000000"; // Default color (black)
 let lastX = 0;
 let lastY = 0;
@@ -58,7 +55,7 @@ document.getElementById("colorPicker").addEventListener("input", (e) => {
   currentColor = e.target.value;
 });
 
-// Mouse Event Listeners for drawing
+// Drawing Events
 canvas.addEventListener("mousedown", (e) => {
   drawing = true;
   lastX = e.offsetX;
@@ -80,9 +77,8 @@ canvas.addEventListener("mousemove", (e) => {
   lastX = e.offsetX;
   lastY = e.offsetY;
 
-  // Sync drawing with Firebase
-  const drawingData = {
-    userId: userId,         // Include the user's ID
+  // Sync drawing data with Firebase
+const drawingData = {
     x1: lastX,
     y1: lastY,
     x2: e.offsetX,
@@ -91,7 +87,6 @@ canvas.addEventListener("mousemove", (e) => {
     tool: currentTool,
     width: lineWidth
   };
-  
   push(whiteboardRef, drawingData);
 });
 
@@ -109,7 +104,7 @@ onChildAdded(whiteboardRef, (snapshot) => {
 
   if (data.tool === "voiceNote") {
     ctx.fillStyle = data.color || "#000000"; // Default to black if no color specified
-    ctx.font = ${data.fontSize || 16}px Arial;  // Default font size to 16 if not specified
+    ctx.font = `${data.fontSize || 16} px Arial`;  // Default font size to 16 if not specified
     const xPos = data.x || 50;
     const yPos = data.y || 50;
     ctx.fillText(data.note, xPos, yPos);
@@ -159,6 +154,7 @@ document.getElementById("savePdfBtn").addEventListener("click", () => {
   doc.save("whiteboard.pdf");
 });
 
+
 // Check if voice note already exists in Firebase
 function doesVoiceNoteExist(noteContent) {
   return new Promise((resolve, reject) => {
@@ -196,18 +192,19 @@ recognition.onresult = function(event) {
   console.log("Recognized text: ", transcript);
   voiceNote = transcript;
 
+  // Push voice note to Firebase
   if (voiceNote) {
     push(whiteboardRef, {
-      userId: userId,      // Include userId with the voice note
       tool: "voiceNote",
       note: voiceNote,
       color: currentColor,
       fontSize: 16,
       x: 50,
-      y: 50
+      y: currentYPosition
     })
     .then(() => {
       console.log("Voice note sent to Firebase.");
+      currentYPosition += 30;
     })
     .catch((error) => {
       console.error("Error sending voice note to Firebase:", error);
@@ -275,7 +272,7 @@ onChildAdded(whiteboardRef, (snapshot) => {
     } else if (data.tool === "voiceNote") {
       // Voice note rendering logic
       ctx.fillStyle = data.color || "#000000";  // Default to black if no color specified
-      ctx.font = ${data.fontSize || 16}px Arial;  // Default font size to 16 if not specified
+      ctx.font = `${data.fontSize || 16} px Arial`;  // Default font size to 16 if not specified
       const xPos = data.x || 50; // Default starting X position if undefined
       const yPos = data.y || currentYPosition; // Use currentYPosition for consistent spacing
       ctx.fillText(data.note, xPos, yPos);
