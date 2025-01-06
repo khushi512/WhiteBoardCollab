@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collaborative Whiteboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Include Font Awesome for the microphone icon -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>  <!-- jsPDF CDN -->
+</head>
+<body>
+  <div id="main-container">
+    <!-- Toolbar section -->
+    <div id="toolbar">
+      <div class="tool-group">
+        <button id="pencilBtn" class="tool-btn"><img src="pencil.png" alt="Pencil"></button>
+        <button id="penBtn" class="tool-btn"><img src="pen.png" alt="Sketch Pen"></button>
+        <button id="brushBtn" class="tool-btn"><img src="paint-brush.png" alt="Brush"></button>
+        <button id="eraserBtn" class="tool-btn"><img src="eraser.png" alt="Eraser"></button>
+      </div>
+      <div class="tool-group">
+        <input type="color" id="colorPicker" class="color-picker">
+        <button id="clearBtn" class="tool-btn">Clear</button>
+        <button id="saveBtn" class="tool-btn">Save as PNG</button>
+        <button id="savePdfBtn" class="tool-btn">Save as PDF</button>
+      </div>
+      <!-- Voice Note Button -->
+      <div class="tool-group">
+        <button id="voiceSearchBtn" class="voice-btn" title="Click to start voice input">
+          <i class="fas fa-microphone"></i> <!-- Microphone icon -->
+        </button>
+      </div>
+
+      <div id="voiceOutput"></div>
+
+    </div>
+
+    <!-- Whiteboard Canvas Section -->
+    <div id="canvas-container">
+      <canvas id="whiteboard" width="800" height="600"></canvas>
+    </div>
+  </div>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
