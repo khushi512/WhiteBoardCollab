@@ -6,7 +6,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url('background.jpg') no-repeat center center fixed, 
+  background: url('images/image.avif') no-repeat center center fixed, 
               linear-gradient(45deg, #6a11cb, #2575fc); /* Background image + Gradient */
   background-size: cover;
 }
@@ -16,7 +16,7 @@ body {
   flex-direction: column;
   align-items: center;
   width: 90%;
-  max-width: 1400px;
+  max-width: 1000px;
   height: 80%;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 15px;
