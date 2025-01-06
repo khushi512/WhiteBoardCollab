@@ -1,4 +1,4 @@
-
+/* Universal body styles */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
@@ -7,81 +7,95 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url('background.jpg') no-repeat center center fixed, 
-              linear-gradient(45deg, #6a11cb, #2575fc); /* Background image + Gradient */
+  background: url('background.jpg') no-repeat center center fixed,
+              linear-gradient(45deg, #01010e, #bbcae5); /* Background image + Gradient */
   background-size: cover;
+  color: #333; /* Ensures that text is readable on both the image and gradient background */
+  overflow: hidden; /* Prevents scrolling on smaller screens */
 }
-
+.heading{
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Bradley Hand ITC';
+  font-size: 30px;
+}
+/* Main container */
 #main-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%;
-  max-width: 1000px;
-  height: 80%;
+  width: 100%;
+  max-width: 1200px;
+  height: 85%;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  padding: 15px;
+  box-shadow: 0 0 20px 6px rgba(113, 160, 231, 0.8); /* Blue glow on focus */
+  padding: 5px 20px;
+  position: relative;
 }
 
+
+/* Toolbar styling */
 #toolbar {
   display: flex;
-  justify-content: space-between; /* Ensures that the items are spaced out correctly */
+  justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 97%;
   background-color: rgba(40, 159, 214, 0.8);
-  padding: 5px 10px;
+  padding: 10px 20px 10px 20px;
+  border: 2px solid #000;
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  /*box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.8); */
+  
 }
 
+/* Tool group (Buttons and color pickers grouped together) */
 .tool-group {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: auto; /* Default for grouping */
+  gap:20px; /* Creates uniform space between tools */
 }
 
-.tool-btn, .color-picker {
+.tool-btn,
+.color-picker {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  margin: 0 8px; /* Added margin to give space between buttons */
   transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
   position: relative;
+  display: inline-block;
 }
 
-/* Group the first four icons closer */
-.tool-group:first-of-type {
-  margin-right: 20px; /* Add space to separate from the next group */
-}
+/* Style for individual tool buttons */
 
-/* Adjust icon button size */
+
 .tool-btn {
   background: rgba(0, 0, 0, 0.1);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
 }
 
 .tool-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  /*border: 2px dotted rgb(6, 59, 158);*/
+  box-shadow: 0 0 8px 4px rgba(10, 70, 158, 0.8); 
 }
 
 .tool-btn img {
-  width: 25px;
-  height: 25px;
+  width: 28px;
+  height: 28px;
 }
 
-/* Separate color picker and other icons */
+/* Style for color picker */
 .tool-group input[type="color"] {
-  width: 30px;
-  height: 30px;
-  padding: 0;
+  width: 36px;
+  height: 36px;
   transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
@@ -92,22 +106,22 @@ body {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Increase the microphone button size and position it to the right */
+/* Voice button styling */
 .voice-btn {
-  font-size: 24px;
+  font-size: 28px;
   background-color: #fff;
   border: none;
   cursor: pointer;
-  padding: 12px;
+  padding: 15px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  margin-left: auto; /* Align to the right */
 }
 
-/* Hover effect for the microphone */
 .voice-btn:hover {
   transform: scale(1.1);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
@@ -115,28 +129,37 @@ body {
 
 /* Microphone icon color when active */
 .voice-btn.active {
-  background-color: #e0e0e0;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  background-color: #edebeb;
+  /*box-shadow: 0 6px 15px rgb(16, 1, 1);*/
+  box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.8); /* Red glow */
+  
 }
 
+/* Canvas container styles */
 #canvas-container {
   position: relative;
   width: 100%;
   flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
 
 canvas {
   width: 100%;
   height: 100%;
   border: 2px solid #000;
-  border-radius: 10px;
+  border-radius: 15px;
   background: rgba(255, 255, 255, 1);
 }
 
+/* Media queries for responsiveness */
 @media (max-width: 768px) {
+  /* Make the main container take more vertical space */
   #main-container {
-    width: 90%;
-    height: 90%;
+    width: 95%;
+    height: 95%;
   }
 
   #toolbar {
@@ -146,12 +169,35 @@ canvas {
   }
 
   .tool-btn {
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .voice-btn {
+    padding: 12px;
+    font-size: 24px;
+  }
+
+  canvas {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  /* For very small devices, reduce button sizes and spacing */
+  .tool-btn {
+    width: 40px;
+    height: 40px;
   }
 
   .voice-btn {
     padding: 10px;
     font-size: 22px;
   }
+
+  #main-container {
+    padding: 10px;
+  }
 }
+
