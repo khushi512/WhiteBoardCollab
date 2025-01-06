@@ -5,6 +5,7 @@ import { getDatabase, ref, push, onChildAdded, remove, get, query, orderByChild,
 const firebaseConfig = {
     apiKey: "AIzaSyDMLU4qCZH1xfbK2cMDehm_i_T1LPw2tyY",
     authDomain: "whiteboard-be033.firebaseapp.com",
+    databaseURL: 'https://whiteboard-be033-default-rtdb.firebaseio.com',
     projectId: "whiteboard-be033",
     storageBucket: "whiteboard-be033.firebasestorage.app",
     messagingSenderId: "365153102123",
