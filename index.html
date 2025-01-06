@@ -10,7 +10,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>  <!-- jsPDF CDN -->
 </head>
 <body>
+  <!--Interactive WhiteBoard-->
+  <div class="heading">
+    <header><h1>INTERACTIVE WHITEBOARD</h1></header>
+  </div>
+
   <div id="main-container">
+    
     <!-- Toolbar section -->
     <div id="toolbar">
       <div class="tool-group">
@@ -23,8 +29,9 @@
       <div class="tool-group">
         <input type="color" id="colorPicker" class="color-picker">
         <button id="clearBtn" class="tool-btn">Clear</button>
-        <button id="saveBtn" class="tool-btn">Save as PNG</button>
         <button id="savePdfBtn" class="tool-btn">Save as PDF</button>
+        <button id="saveBtn" class="tool-btn">Save as PNG</button>
+        
       </div>
 
       <!-- Voice Note Button -->
@@ -33,10 +40,6 @@
           <i class="fas fa-microphone"></i> <!-- Microphone icon -->
         </button>
       </div>
-
-      
-
-      <div id="voiceOutput"></div>
 
     </div>
 
