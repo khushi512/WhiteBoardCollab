@@ -16,17 +16,20 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
+const userId = user_${Math.floor(Math.random() * 100000)};
+console.log('User ID:', userId);
+
+
 // Create references to different nodes in Firebase
 const whiteboardRef = ref(database, 'drawings');
-// Separate node for voice notes
-const voiceNotesRef = ref(database, 'voiceNotes'); 
+const voiceNotesRef = ref(database, 'voiceNotes'); // Separate node for voice notes
 
 // Setup Canvas
 const canvas = document.getElementById("whiteboard");
 const ctx = canvas.getContext("2d");
 
 let drawing = false;
-let currentTool = "pencil"; // Default tool (pencil)
+let currentTool = "pencil"; // Default tool
 let currentColor = "#000000"; // Default color (black)
 let lastX = 0;
 let lastY = 0;
@@ -55,7 +58,7 @@ document.getElementById("colorPicker").addEventListener("input", (e) => {
   currentColor = e.target.value;
 });
 
-// Drawing Events
+// Mouse Event Listeners for drawing
 canvas.addEventListener("mousedown", (e) => {
   drawing = true;
   lastX = e.offsetX;
@@ -77,8 +80,9 @@ canvas.addEventListener("mousemove", (e) => {
   lastX = e.offsetX;
   lastY = e.offsetY;
 
-  // Sync drawing data with Firebase
-const drawingData = {
+  // Sync drawing with Firebase
+  const drawingData = {
+    userId: userId,         // Include the user's ID
     x1: lastX,
     y1: lastY,
     x2: e.offsetX,
@@ -87,6 +91,7 @@ const drawingData = {
     tool: currentTool,
     width: lineWidth
   };
+  
   push(whiteboardRef, drawingData);
 });
 
@@ -104,7 +109,7 @@ onChildAdded(whiteboardRef, (snapshot) => {
 
   if (data.tool === "voiceNote") {
     ctx.fillStyle = data.color || "#000000"; // Default to black if no color specified
-    ctx.font = `${data.fontSize || 16} px Arial`;  // Default font size to 16 if not specified
+    ctx.font = ${data.fontSize || 16}px Arial;  // Default font size to 16 if not specified
     const xPos = data.x || 50;
     const yPos = data.y || 50;
     ctx.fillText(data.note, xPos, yPos);
@@ -192,25 +197,25 @@ recognition.onresult = function(event) {
   console.log("Recognized text: ", transcript);
   voiceNote = transcript;
 
-  // Push voice note to Firebase
   if (voiceNote) {
     push(whiteboardRef, {
+      userId: userId,      // Include userId with the voice note
       tool: "voiceNote",
       note: voiceNote,
       color: currentColor,
       fontSize: 16,
       x: 50,
-      y: currentYPosition
+      y: 50
     })
     .then(() => {
       console.log("Voice note sent to Firebase.");
-      currentYPosition += 30;
     })
     .catch((error) => {
       console.error("Error sending voice note to Firebase:", error);
     });
   }
 };
+
 
 recognition.onerror = function(event) {
   console.error("Speech recognition error: ", event);
@@ -272,7 +277,7 @@ onChildAdded(whiteboardRef, (snapshot) => {
     } else if (data.tool === "voiceNote") {
       // Voice note rendering logic
       ctx.fillStyle = data.color || "#000000";  // Default to black if no color specified
-      ctx.font = `${data.fontSize || 16} px Arial`;  // Default font size to 16 if not specified
+      ctx.font = ${data.fontSize || 16}px Arial;  // Default font size to 16 if not specified
       const xPos = data.x || 50; // Default starting X position if undefined
       const yPos = data.y || currentYPosition; // Use currentYPosition for consistent spacing
       ctx.fillText(data.note, xPos, yPos);
