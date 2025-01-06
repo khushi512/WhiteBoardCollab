@@ -1,0 +1,168 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+  
+  #main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 900px;
+    height: 70%;
+    max-height: 650px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+  }
+  
+  #toolbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: rgba(45, 107, 132, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  .tool-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .tool-btn, .color-picker {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative;
+  }
+  
+  /* Background shadow for buttons */
+  .tool-btn {
+    background: rgba(0, 0, 0, 0.1); /* Light background shadow */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow behind button */
+    border-radius: 5px; /* Slight rounding of the button corners */
+  }
+  
+  /* Button hover effect with enlarged shadow */
+  .tool-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(16, 16, 16, 0.3); /* Enhanced shadow on hover */
+    border: 2px solid black;
+  }
+  
+  .tool-btn img {
+    width: 25px;
+    height: 25px;
+  }
+  
+  /* Color Picker hover effect */
+  .tool-group input[type="color"] {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add background shadow to color picker */
+  }
+  
+  /* Hover effect for the color picker */
+  .tool-group input[type="color"]:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  #canvas-container {
+    position: relative;
+    margin-top: 10px;
+    width: 100%;
+    flex-grow: 1;
+  }
+  
+  canvas {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #000;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 1);
+  }
+  
+  .voice-btn {
+    font-size: 20px; /* Larger size for the icon */
+    background-color: #fff; /* White background */
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%; /* Circular button */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for the voice button */
+  }
+  
+  .voice-btn i {
+    color: #333; /* Icon color */
+  }
+  
+  .voice-btn:hover {
+    background-color: #f0f0f0; /* Light hover effect */
+  }
+  
+  .voice-btn.active {
+    background-color: #e0e0e0; /* Active button color */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow on active state */
+  }
+  
+  /* Canvas Container */
+  #canvas-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  /* Whiteboard Canvas */
+  #whiteboard {
+    border: 2px solid #ccc;
+    background-color: white;
+    cursor: crosshair;
+  }
+  
+  /* Media Query for Responsiveness */
+  @media (max-width: 768px) {
+    #main-container {
+      width: 90%;
+      height: 80%;
+    }
+  
+    #toolbar {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .tool-group {
+      margin-bottom: 10px;
+    }
+  
+    .tool-btn {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  
+  /* Width adjustment input */
+  .tool-group input[type="range"] {
+    width: 150px;
+    margin-left: 10px;
+  }
