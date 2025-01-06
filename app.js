@@ -10,7 +10,7 @@ const firebaseConfig = {
     messagingSenderId: "365153102123",
     appId: "1:365153102123:web:75197ed8410d89e79cbd6e",
     measurementId: "G-067ZQ3G1YM"
-  };
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -18,7 +18,6 @@ const database = getDatabase(app);
 
 const userId = user_${Math.floor(Math.random() * 100000)};
 console.log('User ID:', userId);
-
 
 // Create references to different nodes in Firebase
 const whiteboardRef = ref(database, 'drawings');
@@ -159,7 +158,6 @@ document.getElementById("savePdfBtn").addEventListener("click", () => {
   doc.save("whiteboard.pdf");
 });
 
-
 // Check if voice note already exists in Firebase
 function doesVoiceNoteExist(noteContent) {
   return new Promise((resolve, reject) => {
@@ -215,7 +213,6 @@ recognition.onresult = function(event) {
     });
   }
 };
-
 
 recognition.onerror = function(event) {
   console.error("Speech recognition error: ", event);
